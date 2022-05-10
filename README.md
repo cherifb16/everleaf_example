@@ -1,14 +1,5 @@
 # README
 
-### Model User
-
-| Colums   | Description |
-| -------- | ----------- |
-| name     | string      |
-| email    | string      |
-| password | string      |
-| is_admin | boolean     |
-
 ### Model Task
 
 | Colums      | Description |
@@ -19,6 +10,15 @@
 | status      | boolean     |
 | priority    | string      |
 | user_id     | foreign_key |
+
+### Model User
+
+| Colums   | Description |
+| -------- | ----------- |
+| name     | string      |
+| email    | string      |
+| password | string      |
+| is_admin | boolean     |
 
 ### Ticket
 
