@@ -33,7 +33,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         task = FactoryBot.create(:task, name: 'new_title1', content: 'new_content')
         task = FactoryBot.create(:task, name: 'new_title2', content: 'new_content')
         task = FactoryBot.create(:task, name: 'new_title3', content: 'new_content')
-        task = FactoryBot.create(:task, name: 'new_title4', content: 'new_content')
+        task = FactoryBot.create(:task, name: 'new_title4', content: 'new_content4')
         visit tasks_path
         task_test = all('td')
         expect(task_test[0]).to  have_content 'new_title4'
