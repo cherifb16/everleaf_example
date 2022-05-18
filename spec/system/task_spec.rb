@@ -11,7 +11,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         visit new_task_path
         fill_in 'Name', with: 'title_test'
         fill_in 'Content', with: 'content_test'
-        click_on 'Create Task'
+        click_on '登録する'
         expect(page).to have_content 'title_test'
       end
     end
