@@ -10,10 +10,10 @@ RSpec.describe Movie, type: :model do
         rating: 'G')
       expect(movie).to be_valid
     end
-    # If there is no Title
-    it "is invalid without a title"
-    # Duplicate Title must be invalid
-    it "is invalid with a duplicate title"
-    # Title is 101 characters or more, it is invalid.
-    it "is invalid with title is 101 or more characters"
+    # # If there is no Title
+    # it "is invalid without a title"
+    # # Duplicate Title must be invalid
+    # it "is invalid with a duplicate title"
+    # # Title is 101 characters or more, it is invalid.
+    # it "is invalid with title is 101 or more characters"
 end

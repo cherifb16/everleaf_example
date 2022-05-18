@@ -28,6 +28,17 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         expect(page).to have_content 'task'
       end
     end
+    context 'Si les tâches sont classées par ordre décroissant de date et de heure de création' do
+      it 'Les nouvelles tâches apparaissent en haut de la liste.' do
+        task = FactoryBot.create(:task, name: 'new_title1', content: 'new_content')
+        task = FactoryBot.create(:task, name: 'new_title2', content: 'new_content')
+        task = FactoryBot.create(:task, name: 'new_title3', content: 'new_content')
+        task = FactoryBot.create(:task, name: 'new_title4', content: 'new_content')
+        visit tasks_path
+        task_test = all('td')
+        expect(task_test[0]).to  have_content 'new_title4'
+      end
+    end
   end
   describe "Fonction d'affichage détaillée" do
      context "Lors de la transition vers un écran de détails de tâche" do
