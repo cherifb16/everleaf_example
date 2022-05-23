@@ -36,3 +36,16 @@
 | task_id   | foreign_key |
 | ticket_id | foreign_key |
 
+
+# pushing step:2 on heroku
+
+
+***
+| heroku login |
+| ------------ |
+| git add . |
+| --------- |
+| git commit -m "step2" |
+| --------------------- |
+| git push heroku step2:master |
+| ---------------------------- |
