@@ -1,25 +1,38 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    if params[:sort_expired]
+      @tasks = Task.all.order(dead_line: :desc).page(params[:page])
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :asc).page(params[:page])
+    else
+      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+    end
+
+    if params[:name].present? && params[:number].present?
+      # return search results where both name and status are valid
+      @tasks = Task.search_name(params[:name]).search_status(params[:number]).page(params[:page])
+      # When the only parameter passed is the task name
+    elsif params[:name].present?
+      @tasks = Task.search_name(params[:name]).page(params[:page])
+      # When the only parameter passed is status
+    elsif params[:number].present?
+      @tasks = Task.search_status(params[:number]).page(params[:page])
+    end
   end
 
-  # GET /tasks/1 or /tasks/1.json
+
   def show
   end
 
-  # GET /tasks/new
   def new
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
   end
 
-  # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
 
@@ -34,7 +47,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -47,7 +59,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
     respond_to do |format|
@@ -57,13 +68,12 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content)
+      params.require(:task).permit(:name, :content, :dead_line, :status, :priority)
     end
 end
